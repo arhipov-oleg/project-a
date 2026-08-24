@@ -332,3 +332,8 @@ a {
     font-size: 14px;
   }
 }
+
+/* Сдвиг шапки вправо на 30px */
+header .container {
+  padding-left: 30px;
+}
