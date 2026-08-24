@@ -53,13 +53,13 @@
           <h2 style="color: #eaeaea; margin-bottom: 20px;">📝 Записи на полях</h2>
           
           <article class="blog-post" style="margin-bottom: 30px; padding: 20px; background: #151515; border: 1px solid #333; border-radius: 5px;">
-            <h3 style="color: #4a9eda; margin-bottom: 10px;">LLM на ESP32: как нейросеть размером с рассказ умещается в плату за $8</h3>
+            <h3 style="color: #56b6c2; margin-bottom: 10px;">LLM на ESP32: как нейросеть размером с рассказ умещается в плату за $8</h3>
             <p style="color: #888; font-size: 0.9em; margin-bottom: 15px;">
               <time datetime="2026-08-24">24 августа 2026</time>
             </p>
             <p>Звучит как шутка: языковая модель на микроконтроллере. Но энтузиасты доказали обратное — на ESP32-S3 уже крутятся локальные LLM размером 28–42 млн параметров со скоростью около 9 токенов в секунду, без единого обращения в облако.</p>
 
-            <h4 style="color: #4a9eda; margin-top: 20px; margin-bottom: 10px;">Что это за «модели»</h4>
+            <h4 style="color: #56b6c2; margin-top: 20px; margin-bottom: 10px;">Что это за «модели»</h4>
             <p>Полноценные LLM (Llama, Mistral и даже NanoGPT) на микроконтроллере не запустятся — ни память, ни вычисления не сойдутся. Но в 2023–2024 годах появились так называемые <strong>tiny LLM</strong> — архитектурно те же трансформеры (Llama-arch), просто крошечные:</p>
             <ul>
               <li><strong>Stories260K</strong> (0.26M параметров) — обучается на датасете TinyStories за минуты на одном GPU;</li>
@@ -69,21 +69,21 @@
             </ul>
             <p>Чатить с такой моделью нельзя, но она умеет генерировать короткие тексты, завершать истории и выполнять простые шаблонные задачи. Для демо, образования и «умного железа с характером» — больше чем достаточно.</p>
 
-            <h4 style="color: #4a9eda; margin-top: 20px; margin-bottom: 10px;">Почему именно ESP32-S3</h4>
+            <h4 style="color: #56b6c2; margin-top: 20px; margin-bottom: 10px;">Почему именно ESP32-S3</h4>
             <ul>
               <li><strong>Векторные инструкции PIE</strong> в ядре Xtensa — аппаратное SIMD-ускорение матричных операций, без которого нужной скорости не снять;</li>
               <li><strong>PSRAM</strong> — внешняя память, куда ложатся веса (512 КБ встроенной SRAM тут бесполезны);</li>
               <li><strong>Flash от 16 МБ</strong> — квантованная 28.9M-модель весит ~15 МБ и размещается прямо в flash.</li>
             </ul>
 
-            <h4 style="color: #4a9eda; margin-top: 20px; margin-bottom: 10px;">Требования</h4>
+            <h4 style="color: #56b6c2; margin-top: 20px; margin-bottom: 10px;">Требования</h4>
             <ol>
               <li><strong>Плата ESP32-S3 с внешней PSRAM</strong> — минимум 2 МБ для маленьких моделей, лучше 8 МБ (например, ESP32-S3 N16R8: 16 МБ flash + 8 МБ PSRAM).</li>
               <li><strong>ESP-IDF</strong> — официальный фреймворк Espressif, настроенный под плату.</li>
               <li><strong>Квантованная модель</strong> — веса сжаты из float32 в <strong>int8</strong>: экономия памяти в 4 раза при практически той же скорости. Для 28.9M это ~14.9 МБ вместо ~58 МБ.</li>
             </ol>
 
-            <h4 style="color: #4a9eda; margin-top: 20px; margin-bottom: 10px;">Установка: краткий алгоритм</h4>
+            <h4 style="color: #56b6c2; margin-top: 20px; margin-bottom: 10px;">Установка: краткий алгоритм</h4>
             <p><strong>1. Окружение.</strong> Установите ESP-IDF (или ESP-IDF + VS Code с ESP-IDF Extension) и выберите плату с PSRAM.</p>
             <p><strong>2. Внешняя память.</strong> В <code>idf.py menuconfig</code> убедитесь, что PSRAM включена: <code>Component config → ESP System Settings → Main SPI → SPI RAM</code>.</p>
             <p><strong>3. Проект.</strong> Отличная стартовая точка — <a href="https://github.com/doryiii/esp32-llm">doryiii/esp32-llm</a>: оптимизированный порт <code>llama2.c</code> Карпатого, поддерживает INT8- и F32-модели:</p>
@@ -97,7 +97,7 @@ idf.py build
 idf.py -p /dev/ttyUSB0 flash monitor   # порт зависит от ОС и адаптера</code></pre>
             <p>В мониторе последовательного порта — потоковая генерация текста со скоростью ~9 токенов/с.</p>
 
-            <h4 style="color: #4a9eda; margin-top: 20px; margin-bottom: 10px;">Почему это вообще работает</h4>
+            <h4 style="color: #56b6c2; margin-top: 20px; margin-bottom: 10px;">Почему это вообще работает</h4>
             <p>Ключевые оптимизации, которые делают трюк возможным:</p>
             <ul>
               <li>горячий цикл матричного умножения написан под SIMD PIE с учётом требований к выравниванию памяти;</li>
@@ -107,14 +107,14 @@ idf.py -p /dev/ttyUSB0 flash monitor   # порт зависит от ОС и а
             </ul>
             <p>Парадокс: второе ядро Xtensa не используется — узкое место не в вычислениях, а в <strong>пропускной способности памяти</strong>.</p>
 
-            <h4 style="color: #4a9eda; margin-top: 20px; margin-bottom: 10px;">Ограничения</h4>
+            <h4 style="color: #56b6c2; margin-top: 20px; margin-bottom: 10px;">Ограничения</h4>
             <ul>
               <li>контекст крошечный (десятки токенов), «понимание» — на уровне детского рассказа;</li>
               <li>9 токенов/с — это «печатающая машинка», а не интерактивный чат;</li>
               <li>для экспериментов — отлично, для продакшена — пока нет.</li>
             </ul>
 
-            <h4 style="color: #4a9eda; margin-top: 20px; margin-bottom: 10px;">Итог</h4>
+            <h4 style="color: #56b6c2; margin-top: 20px; margin-bottom: 10px;">Итог</h4>
             <p>LLM на ESP32 — это не замена облачным моделям, а доказательство того, что порог входа в «локальный интеллект» упал до уровня $8 и одного вечера с паяльником. Начните с Stories260K, поднимитесь до 28.9M — и вы будете писать рассказы на микроконтроллере, полностью офлайн.</p>
             <p><strong>Полезные ссылки:</strong></p>
             <ul>

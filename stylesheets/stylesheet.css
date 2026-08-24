@@ -227,7 +227,7 @@ hr {
 */
 
 a {
-  color: #63c0f5;
+  color: #56b6c2;
   text-shadow: 0 0 5px rgba(104, 182, 255, 0.5);
 }
 
@@ -348,7 +348,7 @@ header h1:before {
 }
 header h1 .tu { color: #b5e853; }
 header h1 .ta { color: #eaeaea; }
-header h1 .th { color: #63c0f5; }
+header h1 .th { color: #56b6c2; }
 header h1 .tp { color: #eaeaea; }
 header h2 {
   color: #9a9a9a;
