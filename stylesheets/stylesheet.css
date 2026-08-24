@@ -337,3 +337,31 @@ a {
 header .container {
   padding-left: 30px;
 }
+
+/* Терминальная шапка */
+header h1 {
+  margin: 0;
+  color: inherit;
+}
+header h1:before {
+  content: none;
+}
+header h1 .tu { color: #b5e853; }
+header h1 .ta { color: #eaeaea; }
+header h1 .th { color: #63c0f5; }
+header h1 .tp { color: #eaeaea; }
+header h2 {
+  color: #9a9a9a;
+  font-size: 15px;
+}
+.cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1em;
+  background: #b5e853;
+  vertical-align: text-bottom;
+  animation: cursor-blink 1s steps(1) infinite;
+}
+@keyframes cursor-blink {
+  50% { opacity: 0; }
+}
