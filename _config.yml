@@ -1,0 +1,12 @@
+title: Project-a
+description: "Команда, которая создаёт мечту"
+author: Project-a
+lang: ru
+
+remote_theme: pages-themes/hacker@v0.2.0
+
+show_downloads: false
+google_analytics: UA-54339975-1
+
+github:
+  repository_url: https://github.com/arhipov-oleg/project-a

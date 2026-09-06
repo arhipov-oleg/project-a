@@ -1,1 +1,9 @@
-(empty)
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+Gemfile.lock
+config.inc.rb
+
+# local build helper
+_config.build.yml
